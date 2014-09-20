@@ -39,12 +39,7 @@
 
 - (IBAction)touchCardButton:(UIButton *)sender {
     
-    self.count ++;
-    
-    NSLog(@"Touch %d ...", self.count);
-    
     if ([sender.currentTitle length]) {
-        
         //clear the card title
         [sender setTitle:@"" forState:UIControlStateNormal];
         
@@ -52,17 +47,25 @@
         UIImage *image = [UIImage imageNamed:@"cardback"];
         [sender setBackgroundImage:image
                           forState:UIControlStateNormal];
-    
+        self.count ++;
     } else {
-    
         Card *randomCard = [self.deck drawRandomCard];
         
-        [sender setTitle:randomCard.contents forState:UIControlStateNormal];
-    
-        UIImage *image = [UIImage imageNamed:@"cardfront"];
-        [sender setBackgroundImage:image
-                          forState:UIControlStateNormal];
+        //only if the cards are still available
+        // nil is returned if they are running out
+        if (randomCard)
+        {
+            [sender setTitle:randomCard.contents forState:UIControlStateNormal];
+            UIImage *image = [UIImage imageNamed:@"cardfront"];
+            [sender setBackgroundImage:image
+                              forState:UIControlStateNormal];
+            self.count ++;
+        }
     }
+    
+
+    
+    //NSLog(@"Touch %d ...", self.count);
 }
 
 
