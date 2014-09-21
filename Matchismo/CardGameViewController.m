@@ -9,77 +9,59 @@
 #import "CardGameViewController.h"
 #import "Deck.h"
 #import "PlayingCardDeck.h"
+#import "CardMatchingGame.h"
 
 @interface CardGameViewController ()
-
-@property (weak, nonatomic) IBOutlet UILabel *flipLabel;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (nonatomic) int count;
-@property (strong, nonatomic) Deck *deck;
+@property (strong, nonatomic) CardMatchingGame *cardGame;
 @end
 
 @implementation CardGameViewController
 
-- (Deck *) deck
+- (CardMatchingGame *) cardGame
 {
-    if (!_deck)
-        _deck = [self createDeck];
+    if (!_cardGame)
+        _cardGame = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+                                                      usingDeck:[self createDeck]];
     
-    return _deck;
+    return _cardGame;
 }
 
-- (Deck *) createDeck
+- (PlayingCardDeck *) createDeck
 {
     return [[PlayingCardDeck alloc] init];
 }
 
-- (void) setCount:(int)count {
-    _count = count;
-    self.flipLabel.text = [NSString stringWithFormat:@"Flips: %d", self.count];
+- (IBAction)touchCardButton:(UIButton *)sender
+{
+    int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
+    [self.cardGame chooseCardAtIndex:chosenButtonIndex];
+    [self updateUI];
+    
+
 }
 
-- (IBAction)touchCardButton:(UIButton *)sender {
-    
-    if ([sender.currentTitle length]) {
-        //clear the card title
-        [sender setTitle:@"" forState:UIControlStateNormal];
+- (void) updateUI
+{
+    for (UIButton *cardButton in self.cardButtons) {
+        int cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
+        Card *card = [self.cardGame cardAtIndex:cardButtonIndex];
         
-        //and set the background image to the back image
-        UIImage *image = [UIImage imageNamed:@"cardback"];
-        [sender setBackgroundImage:image
-                          forState:UIControlStateNormal];
-        self.count ++;
-    } else {
-        Card *randomCard = [self.deck drawRandomCard];
-        
-        //only if the cards are still available
-        // nil is returned if they are running out
-        if (randomCard)
-        {
-            [sender setTitle:randomCard.contents forState:UIControlStateNormal];
-            UIImage *image = [UIImage imageNamed:@"cardfront"];
-            [sender setBackgroundImage:image
-                              forState:UIControlStateNormal];
-            self.count ++;
-        }
+        [cardButton setTitle:[self titleForCard: card] forState:UIControlStateNormal];
+        [cardButton setBackgroundImage:[self backGroundImageForCard: card] forState:UIControlStateNormal];
+        cardButton.enabled = !card.isMatched;
     }
-    
-
-    
-    //NSLog(@"Touch %d ...", self.count);
 }
 
+- (NSString *) titleForCard: (Card *)card
+{
+    return (card.isChosen? card.contents: @"");
+}
+
+- (UIImage *) backGroundImageForCard: (Card *)card
+{
+    return [UIImage imageNamed:(card.isChosen? @"cardfront": @"cardback")];
+}
 
 @end
-
-
-//- (void)viewDidLoad
-//{
-//    [super viewDidLoad];
-//	// Do any additional setup after loading the view, typically from a nib.
-//}
-//
-//- (void)didReceiveMemoryWarning
-//{
-//    [super didReceiveMemoryWarning];
-//    // Dispose of any resources that can be recreated.
-//}

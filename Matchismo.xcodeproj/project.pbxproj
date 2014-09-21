@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		045604D619CE9D0C00AB2FF8 /* CardMatchingGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 045604D519CE9D0C00AB2FF8 /* CardMatchingGame.m */; };
 		0486048E19CB6C110074B999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0486048D19CB6C110074B999 /* Foundation.framework */; };
 		0486049019CB6C110074B999 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0486048F19CB6C110074B999 /* CoreGraphics.framework */; };
 		0486049219CB6C110074B999 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0486049119CB6C110074B999 /* UIKit.framework */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		045604D419CE9D0C00AB2FF8 /* CardMatchingGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardMatchingGame.h; path = Matchismo/Model/CardMatchingGame.h; sourceTree = "<group>"; };
+		045604D519CE9D0C00AB2FF8 /* CardMatchingGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardMatchingGame.m; path = Matchismo/Model/CardMatchingGame.m; sourceTree = "<group>"; };
 		0486048A19CB6C110074B999 /* Matchismo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Matchismo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0486048D19CB6C110074B999 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0486048F19CB6C110074B999 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -176,6 +179,8 @@
 				04CCF9FF19CC03160016504C /* Deck.m */,
 				04CCFA0119CC03390016504C /* PlayingCardDeck.h */,
 				04CCFA0219CC03390016504C /* PlayingCardDeck.m */,
+				045604D419CE9D0C00AB2FF8 /* CardMatchingGame.h */,
+				045604D519CE9D0C00AB2FF8 /* CardMatchingGame.m */,
 			);
 			name = Model;
 			path = ..;
@@ -283,6 +288,7 @@
 				048604A419CB6C120074B999 /* CardGameViewController.m in Sources */,
 				0486049A19CB6C110074B999 /* main.m in Sources */,
 				04CCF9FD19CC02C20016504C /* PlayingCard.m in Sources */,
+				045604D619CE9D0C00AB2FF8 /* CardMatchingGame.m in Sources */,
 				04CCFA0319CC03390016504C /* PlayingCardDeck.m in Sources */,
 				04CCFA0019CC03160016504C /* Deck.m in Sources */,
 				04CCF9F919CC00280016504C /* Card.m in Sources */,

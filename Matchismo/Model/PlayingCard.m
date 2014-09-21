@@ -71,7 +71,26 @@ NSString * const PlayingCardSuitClub=@"♠︎";
 }
 
 
-- (int)match:(NSArray *)otherCards
+- (int) match:(NSArray *)otherCards
+{
+    int matchScore = 0;
+    
+    if ([otherCards count] == 1)
+    {
+        PlayingCard *otherCard = [otherCards firstObject];
+        if (otherCard.rank == self.rank) {
+            matchScore = 4;
+        }
+        else if (otherCard.suit == self.suit)
+        {
+            matchScore = 1;
+        }
+    }
+    
+    return matchScore;
+}
+
+- (int) matchUsingLambda:(NSArray *)otherCards
 {
     int score = 0;
     

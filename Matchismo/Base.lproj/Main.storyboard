@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -28,12 +27,6 @@
                                     <action selector="touchCardButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="CHJ-7u-guA"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Flips: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5F-Oe-xkF">
-                                <rect key="frame" x="20" y="439" width="280" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgX-9U-KCf">
                                 <rect key="frame" x="88" y="20" width="64" height="96"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -203,7 +196,22 @@
                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <outlet property="flipLabel" destination="D5F-Oe-xkF" id="edG-ha-f7Y"/>
+                        <outletCollection property="cardButtons" destination="Z0H-My-3Mi" id="5Hf-Lf-YKE"/>
+                        <outletCollection property="cardButtons" destination="NgX-9U-KCf" id="bkB-Ro-rEo"/>
+                        <outletCollection property="cardButtons" destination="nXT-tW-IyD" id="lTW-lV-wUj"/>
+                        <outletCollection property="cardButtons" destination="weQ-pk-Yfq" id="gMm-kj-7yq"/>
+                        <outletCollection property="cardButtons" destination="YAh-g8-BmJ" id="HcR-nd-R0u"/>
+                        <outletCollection property="cardButtons" destination="KLp-cI-Wm2" id="lec-QR-ddg"/>
+                        <outletCollection property="cardButtons" destination="MKk-q5-z7c" id="ATA-IU-qdD"/>
+                        <outletCollection property="cardButtons" destination="Dip-7H-0D8" id="18b-1l-bCh"/>
+                        <outletCollection property="cardButtons" destination="fRE-Mq-GQO" id="gww-Rh-ntp"/>
+                        <outletCollection property="cardButtons" destination="D46-wm-wBA" id="prh-lL-ZvV"/>
+                        <outletCollection property="cardButtons" destination="fnf-oe-t9C" id="221-8P-vsT"/>
+                        <outletCollection property="cardButtons" destination="ffz-1R-flu" id="xwb-dE-RuG"/>
+                        <outletCollection property="cardButtons" destination="oXL-u2-zKc" id="5dQ-1D-ra1"/>
+                        <outletCollection property="cardButtons" destination="rHV-JV-Wr6" id="aK1-a2-5UG"/>
+                        <outletCollection property="cardButtons" destination="92s-yQ-DRp" id="t1z-zp-edL"/>
+                        <outletCollection property="cardButtons" destination="CNI-ti-30l" id="0lP-bZ-Huf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
