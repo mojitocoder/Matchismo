@@ -9,9 +9,9 @@
 #import "PlayingCard.h"
 
 NSString * const PlayingCardSuitHeart = @"♥︎";
-NSString * const PlayingCardSuitDiamond=@"♦︎";
-NSString * const PlayingCardSuitSpade=@"♣︎";
-NSString * const PlayingCardSuitClub=@"♠︎";
+NSString * const PlayingCardSuitDiamond = @"♦︎";
+NSString * const PlayingCardSuitSpade = @"♣︎";
+NSString * const PlayingCardSuitClub = @"♠︎";
 
 @implementation PlayingCard
 
