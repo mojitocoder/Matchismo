@@ -48,6 +48,12 @@ NSString * const PlayingCardSuitClub = @"♠︎";
     return (_suit)? _suit : @"Ø";
 }
 
+- (BOOL) inRed
+{
+    return (self.suit == PlayingCardSuitHeart ||
+            self.suit == PlayingCardSuitDiamond);
+}
+
 - (void) setSuit:(NSString *)suit
 {
     if ([[PlayingCard validSuits] containsObject:suit]){

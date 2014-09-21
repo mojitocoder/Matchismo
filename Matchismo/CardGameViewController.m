@@ -10,6 +10,7 @@
 #import "Deck.h"
 #import "PlayingCardDeck.h"
 #import "CardMatchingGame.h"
+#import "PlayingCard.h"
 
 @interface CardGameViewController ()
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
@@ -39,8 +40,6 @@
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
     [self.cardGame chooseCardAtIndex:chosenButtonIndex];
     [self updateUI];
-    
-
 }
 
 - (void) updateUI
@@ -49,9 +48,22 @@
         int cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
         Card *card = [self.cardGame cardAtIndex:cardButtonIndex];
         
-        [cardButton setTitle:[self titleForCard: card] forState:UIControlStateNormal];
-        [cardButton setBackgroundImage:[self backGroundImageForCard: card] forState:UIControlStateNormal];
+        //Retrospection can be used here to make sure the card is
+        //  an instance of PlayingCard at runtime
+        if ([card isMemberOfClass:[PlayingCard class]])
+        {
+            PlayingCard *playingCard = (PlayingCard *)card;
+            UIColor *textColour = playingCard.inRed? [UIColor redColor]: [UIColor blackColor];
+            if (playingCard.inRed)
+                [cardButton setTitleColor:textColour forState:UIControlStateNormal];
+        }
+        
+        [cardButton setTitle:[self titleForCard: card]
+                    forState:UIControlStateNormal];
+        [cardButton setBackgroundImage:[self backGroundImageForCard: card]
+                              forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
+        
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.cardGame.score];
 }

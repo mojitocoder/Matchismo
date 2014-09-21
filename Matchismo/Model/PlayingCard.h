@@ -17,6 +17,7 @@ extern NSString * const PlayingCardSuitClub;
 
 @property (strong, nonatomic) NSString *suit;
 @property (nonatomic) NSUInteger rank;
+@property (nonatomic, readonly) BOOL inRed;
 
 + (NSArray *) validSuits;
 + (NSArray *) validRanks;
