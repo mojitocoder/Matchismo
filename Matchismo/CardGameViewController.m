@@ -13,6 +13,7 @@
 
 @interface CardGameViewController ()
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (nonatomic) int count;
 @property (strong, nonatomic) CardMatchingGame *cardGame;
 @end
@@ -52,6 +53,7 @@
         [cardButton setBackgroundImage:[self backGroundImageForCard: card] forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
     }
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.cardGame.score];
 }
 
 - (NSString *) titleForCard: (Card *)card
