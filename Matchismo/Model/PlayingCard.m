@@ -50,8 +50,11 @@ NSString * const PlayingCardSuitClub = @"♠︎";
 
 - (BOOL) inRed
 {
-    return (self.suit == PlayingCardSuitHeart ||
-            self.suit == PlayingCardSuitDiamond);
+    BOOL value = (self.suit == PlayingCardSuitHeart || self.suit == PlayingCardSuitDiamond);
+    
+    //NSLog(@"suit %@, red = %@", self.suit, value? @"Yes": @"No");
+    
+    return value;
 }
 
 - (void) setSuit:(NSString *)suit

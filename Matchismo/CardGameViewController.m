@@ -37,15 +37,16 @@
 
 - (IBAction)touchCardButton:(UIButton *)sender
 {
-    int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
+    int chosenButtonIndex = (int)[self.cardButtons indexOfObject:sender];
     [self.cardGame chooseCardAtIndex:chosenButtonIndex];
     [self updateUI];
 }
 
 - (void) updateUI
 {
-    for (UIButton *cardButton in self.cardButtons) {
-        int cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
+    for (UIButton *cardButton in self.cardButtons)
+    {
+        int cardButtonIndex = (int)[self.cardButtons indexOfObject:cardButton];
         Card *card = [self.cardGame cardAtIndex:cardButtonIndex];
         
         //Retrospection can be used here to make sure the card is
@@ -77,5 +78,38 @@
 {
     return [UIImage imageNamed:(card.isChosen? @"cardfront": @"cardback")];
 }
+
+- (IBAction)touchRestart:(UIButton *)sender
+{
+    // create a simple alert with an OK and cancel button
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle: @"Restart Game?"
+                          message: @"Are you sure you want to abandon the current game and restart?"
+                          delegate: self
+                          cancelButtonTitle: @"No"
+                          otherButtonTitles: @"Yes",
+                          nil];
+    [alert show];
+    //[alert release];
+}
+
+
+- (void)alertView: (UIAlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) //index of the yes button
+    {
+        self.cardGame = nil;
+        [self updateUI];
+    }
+}
+
+- (IBAction)changeGameMode:(UISegmentedControl *)sender
+{
+    int selectedIndex = [sender selectedSegmentIndex];
+    NSString *title = [sender titleForSegmentAtIndex:[sender selectedSegmentIndex]];
+    
+    NSLog(@"index = %d: %@", selectedIndex, title);
+}
+
 
 @end
