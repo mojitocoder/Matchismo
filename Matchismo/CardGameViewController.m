@@ -81,7 +81,7 @@
 
 - (IBAction)touchRestart:(UIButton *)sender
 {
-    // create a simple alert with an OK and cancel button
+    // create a simple confirmation dialog
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle: @"Restart Game?"
                           message: @"Are you sure you want to abandon the current game and restart?"
