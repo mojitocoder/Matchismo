@@ -17,7 +17,12 @@
 @property (nonatomic, readwrite) NSInteger score;
 
 @property (nonatomic, strong) NSMutableArray *cards;
+
+@property (nonatomic, readwrite) NSUInteger matchingCards;
+
 @end
+
+
 
 
 @implementation CardMatchingGame
@@ -33,13 +38,19 @@ static const int COST_TO_CHOOSE = 1;
 }
 
 
-- (instancetype) initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck
+- (instancetype) initWithCardCount: (NSUInteger)count
+                         usingDeck: (Deck *)deck
+                              with: (NSUInteger)matchingCards
 {
     self = [super init];
     
     if (self)
     {
-        for (int i = 0; i < count; i++) {
+        //store the number of matching cards (game mode)
+        self.matchingCards = matchingCards;
+        
+        for (int i = 0; i < count; i++)
+        {
             Card *card = [deck drawRandomCard];
             if (card)
             {

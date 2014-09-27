@@ -15,6 +15,7 @@
 @interface CardGameViewController ()
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *gameModeButton;
 @property (nonatomic) int count;
 @property (strong, nonatomic) CardMatchingGame *cardGame;
 @end
@@ -23,9 +24,11 @@
 
 - (CardMatchingGame *) cardGame
 {
+    NSUInteger matchingCards = [self.gameModeButton selectedSegmentIndex] + 2;
     if (!_cardGame)
-        _cardGame = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
-                                                      usingDeck:[self createDeck]];
+        _cardGame = [[CardMatchingGame alloc] initWithCardCount: [self.cardButtons count]
+                                                      usingDeck: [self createDeck]
+                                                           with: matchingCards ];
     
     return _cardGame;
 }

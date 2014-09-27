@@ -16,11 +16,14 @@
 //  default initialiser.
 //  Developers have to manually make sure the code call the correct one
 - (instancetype) initWithCardCount: (NSUInteger)count
-                        usingDeck: (Deck *)deck;
+                         usingDeck: (Deck *)deck
+                              with: (NSUInteger)matchingCards;
 
 - (void) chooseCardAtIndex: (NSUInteger)index;
 - (Card*) cardAtIndex: (NSUInteger)index;
 
 @property (nonatomic, readonly) NSInteger score;
+
+@property (nonatomic, readonly) NSUInteger matchingCards;
 
 @end

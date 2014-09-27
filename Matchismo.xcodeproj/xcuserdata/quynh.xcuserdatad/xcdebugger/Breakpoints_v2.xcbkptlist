@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Matchismo/CardGameViewController.m"
-            timestampString = "433320504.731503"
+            filePath = "Matchismo/Model/CardMatchingGame.m"
+            timestampString = "433507265.14804"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "-touchRestart:"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "-initWithCardCount:usingDeck:with:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
