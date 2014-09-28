@@ -20,6 +20,8 @@
 
 @property (nonatomic, readwrite) NSUInteger matchingCards;
 
+@property (nonatomic, strong) NSMutableArray * chosenCards;
+
 @end
 
 
@@ -38,6 +40,12 @@ static const int COST_TO_CHOOSE = 1;
 }
 
 
+- (NSMutableArray *) chosenCards
+{
+    if (!_chosenCards) _chosenCards = [[NSMutableArray alloc] init];
+    return _chosenCards;
+}
+
 - (instancetype) initWithCardCount: (NSUInteger)count
                          usingDeck: (Deck *)deck
                               with: (NSUInteger)matchingCards
@@ -46,6 +54,8 @@ static const int COST_TO_CHOOSE = 1;
     
     if (self)
     {
+        if (matchingCards < 2) return nil;
+        
         //store the number of matching cards (game mode)
         self.matchingCards = matchingCards;
         
@@ -54,7 +64,7 @@ static const int COST_TO_CHOOSE = 1;
             Card *card = [deck drawRandomCard];
             if (card)
             {
-                [self.cards addObject:card];
+                [self.cards addObject: card];
             }
             else //return a nil (for CardMatchingGame's initialiser if params are invalid)
             {
@@ -67,45 +77,60 @@ static const int COST_TO_CHOOSE = 1;
     return self;
 }
 
-- (void) chooseCardAtIndex:(NSUInteger)index
+- (void) chooseCardAtIndex: (NSUInteger)index
 {
     Card *card = [self cardAtIndex: index];
     
     if (!card.isMatched)
     {
-        if (card.isChosen) //flip the card only
+        if (card.isChosen)
         {
+            // Flip the card only
+            // Here is the case where the user flips the cards
+            //  to see what they are and then flips them back - to avoid penalty
             card.chosen = NO;
         }
         else
         {
+            //Get the list of other chosen cards at this point
+            [self.chosenCards removeAllObjects];
             for (Card *otherCard in self.cards)
             {
-                //match against all other cards which have been chosen,
-                //  but not yet matched to other card(s)
-                if (otherCard.isChosen && !otherCard.isMatched)
+                if (!otherCard.isMatched && otherCard.isChosen)
+                    [self.chosenCards addObject: otherCard];
+            }
+            
+            //Only evaluate any matching when the total number of
+            // chosen cards reaches the pre-defined number
+            NSUInteger chosenCardsCount = [self.chosenCards count];
+            if (chosenCardsCount == self.matchingCards - 1)
+            {
+                int matchingScore = [card match: self.chosenCards];
+                if (matchingScore)
                 {
-                    int matchScore = [card match:@[otherCard]];
-                    if (matchScore)
+                    self.score += matchingScore * MATCH_BONUS;
+                    card.matched = YES;
+                    for (Card *otherCard in self.chosenCards)
                     {
-                        self.score += matchScore * MATCH_BONUS;
                         otherCard.matched = YES;
-                        card.matched = YES;
                     }
-                    else
+                }
+                else
+                {
+                    //no match => flip all cards over + penalty,
+                    //  but leave the current card at the current stage
+                    self.score -= MISMATCH_PENALTY;
+                    for (Card *otherCard in self.chosenCards)
                     {
-                        self.score -= MISMATCH_PENALTY;
                         otherCard.chosen = NO;
                     }
-                    
-                    break; //because the game only supports 2 card matching at the moment
                 }
             }
+            
             self.score -= COST_TO_CHOOSE;
             card.chosen = YES;
         }
     }
-    
 }
 
 - (Card *)cardAtIndex:(NSUInteger)index

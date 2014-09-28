@@ -59,7 +59,8 @@ NSString * const PlayingCardSuitClub = @"♠︎";
 
 - (void) setSuit:(NSString *)suit
 {
-    if ([[PlayingCard validSuits] containsObject:suit]){
+    if ([[PlayingCard validSuits] containsObject:suit])
+    {
         _suit = suit;
     }
 }
@@ -76,23 +77,47 @@ NSString * const PlayingCardSuitClub = @"♠︎";
 - (NSString *) contents
 {
     NSArray *rank = [PlayingCard validRanks];
-    return [rank[self.rank] stringByAppendingString:self.suit];
+    return [rank[self.rank] stringByAppendingString: self.suit];
 }
 
 
-- (int) match:(NSArray *)otherCards
+- (int) match: (NSArray *)otherCards
 {
     int matchScore = 0;
     
-    if ([otherCards count] == 1)
+    if ([otherCards count] == 1) //2-card mode
     {
         PlayingCard *otherCard = [otherCards firstObject];
-        if (otherCard.rank == self.rank) {
+        if (otherCard.rank == self.rank)
+        {
             matchScore = 4;
         }
         else if (otherCard.suit == self.suit)
         {
             matchScore = 1;
+        }
+    }
+    else if ([otherCards count] == 2) //3-card mode
+    {
+        PlayingCard *cardA = [otherCards firstObject];
+        PlayingCard *cardB = [otherCards lastObject];
+        
+        if (self.rank == cardA.rank && self.rank == cardB.rank)
+        {
+            matchScore = 12;
+        }
+        else if (self.rank == cardA.rank || cardA.rank == cardB.rank || self.rank == cardB.rank)
+        {
+            matchScore = 3;
+        }
+        
+        if (self.suit == cardA.suit && self.suit == cardB.suit)
+        {
+            matchScore += 3;
+        }
+        else if (self.suit == cardA.suit || cardA.suit == cardB.suit || self.suit == cardB.suit)
+        {
+            matchScore += 1;
         }
     }
     
