@@ -138,4 +138,12 @@ static const int COST_TO_CHOOSE = 1;
     return (index < [self.cards count])? self.cards[index]: nil;
 }
 
+- (BOOL) gameStarted
+{
+    for (Card *card in self.cards) {
+        if (card.chosen || card.matched) return YES;
+    }
+    return NO;
+}
+
 @end

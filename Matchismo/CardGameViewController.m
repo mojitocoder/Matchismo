@@ -43,6 +43,7 @@
     int chosenButtonIndex = (int)[self.cardButtons indexOfObject:sender];
     [self.cardGame chooseCardAtIndex:chosenButtonIndex];
     [self updateUI];
+    self.gameModeButton.enabled = NO;
 }
 
 - (void) updateUI
@@ -82,37 +83,48 @@
     return [UIImage imageNamed:(card.isChosen? @"cardfront": @"cardback")];
 }
 
-- (IBAction)touchRestart:(UIButton *)sender
+- (IBAction)changeGameMode: (UISegmentedControl *)sender
 {
-    // create a simple confirmation dialog
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle: @"Restart Game?"
-                          message: @"Are you sure you want to abandon the current game and restart?"
-                          delegate: self
-                          cancelButtonTitle: @"No"
-                          otherButtonTitles: @"Yes",
-                          nil];
-    [alert show];
-    //[alert release];
+//    int selectedIndex = [sender selectedSegmentIndex];
+//    NSString *title = [sender titleForSegmentAtIndex:[sender selectedSegmentIndex]];
+//    NSLog(@"index = %d: %@", selectedIndex, title);
+    
+    [self restartGame];
 }
-
 
 - (void)alertView: (UIAlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex
 {
     if (buttonIndex == 1) //index of the yes button
     {
-        self.cardGame = nil;
-        [self updateUI];
+        [self restartGame];
+        self.gameModeButton.enabled = YES;
     }
 }
 
-- (IBAction)changeGameMode:(UISegmentedControl *)sender
+- (void) restartGame
 {
-    int selectedIndex = [sender selectedSegmentIndex];
-    NSString *title = [sender titleForSegmentAtIndex:[sender selectedSegmentIndex]];
-    
-    NSLog(@"index = %d: %@", selectedIndex, title);
+    self.cardGame = nil;
+    [self updateUI];
 }
 
+- (IBAction)touchRestart:(UIButton *)sender
+{
+    if (self.cardGame.gameStarted)
+    {
+        // create a simple confirmation dialog
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Restart Game?"
+                                    message: @"Are you sure you want to abandon the current game and restart?"
+                                   delegate: self
+                          cancelButtonTitle: @"No"
+                          otherButtonTitles: @"Yes",
+                          nil];
+        [alert show];
+        //[alert release];
+    }
+    else [self restartGame];
+}
 
 @end
+
+

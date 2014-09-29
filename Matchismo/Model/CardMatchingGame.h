@@ -12,7 +12,7 @@
 
 @interface CardMatchingGame : NSObject
 
-//There is no way in Objective C to designate the
+// There is no way in Objective C to designate the
 //  default initialiser.
 //  Developers have to manually make sure the code call the correct one
 - (instancetype) initWithCardCount: (NSUInteger)count
@@ -22,8 +22,11 @@
 - (void) chooseCardAtIndex: (NSUInteger)index;
 - (Card*) cardAtIndex: (NSUInteger)index;
 
+
 @property (nonatomic, readonly) NSInteger score;
 
 @property (nonatomic, readonly) NSUInteger matchingCards;
+
+@property (nonatomic, readonly) BOOL gameStarted;
 
 @end
