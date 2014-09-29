@@ -40,10 +40,11 @@
 
 - (IBAction)touchCardButton:(UIButton *)sender
 {
-    int chosenButtonIndex = (int)[self.cardButtons indexOfObject:sender];
-    [self.cardGame chooseCardAtIndex:chosenButtonIndex];
+    int chosenButtonIndex = (int)[self.cardButtons indexOfObject: sender];
+    [self.cardGame chooseCardAtIndex: chosenButtonIndex];
     [self updateUI];
-    self.gameModeButton.enabled = NO;
+    
+    if (self.gameModeButton.enabled) self.gameModeButton.enabled = NO;
 }
 
 - (void) updateUI
